@@ -25,6 +25,9 @@
 		B00000000000000000000010 /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000010 /* TranslationService.swift */; };
 		B00000000000000000000011 /* llm_prompts.json in Resources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000011 /* llm_prompts.json */; };
 		B00000000000000000000012 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000012 /* Assets.xcassets */; };
+		B00000000000000000000013 /* BackgroundTranslationActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000013 /* BackgroundTranslationActivity.swift */; };
+		B00000000000000000000014 /* QuickTranslateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000014 /* QuickTranslateView.swift */; };
+		CZIP0000000000000000000001 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = SPDEPZIP000000000000000001 /* ZIPFoundation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,8 @@
 		F00000000000000000000010 /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
 		F00000000000000000000011 /* llm_prompts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = llm_prompts.json; sourceTree = "<group>"; };
 		F00000000000000000000012 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F00000000000000000000013 /* BackgroundTranslationActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTranslationActivity.swift; sourceTree = "<group>"; };
+		F00000000000000000000014 /* QuickTranslateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTranslateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CZIP0000000000000000000001 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +93,8 @@
 				F0000000000000000000000E /* VisionTextPipeline.swift */,
 				F0000000000000000000000F /* LlmClient.swift */,
 				F00000000000000000000010 /* TranslationService.swift */,
+				F00000000000000000000013 /* BackgroundTranslationActivity.swift */,
+				F00000000000000000000014 /* QuickTranslateView.swift */,
 				G00000000000000000000004 /* Resources */,
 				F00000000000000000000012 /* Assets.xcassets */,
 			);
@@ -125,6 +133,9 @@
 			dependencies = (
 			);
 			name = MangaTranslator;
+			packageProductDependencies = (
+				SPDEPZIP000000000000000001 /* ZIPFoundation */,
+			);
 			productName = MangaTranslator;
 			productReference = E00000000000000000000001 /* MangaTranslator.app */;
 			productType = "com.apple.product-type.application";
@@ -156,6 +167,9 @@
 			productRefGroup = G00000000000000000000003 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
+			packageReferences = (
+				PKGZIP000000000000000000001 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+			);
 			targets = (
 				T00000000000000000000001 /* MangaTranslator */,
 			);
@@ -195,6 +209,8 @@
 				B0000000000000000000000E /* VisionTextPipeline.swift in Sources */,
 				B0000000000000000000000F /* LlmClient.swift in Sources */,
 				B00000000000000000000010 /* TranslationService.swift in Sources */,
+				B00000000000000000000013 /* BackgroundTranslationActivity.swift in Sources */,
+				B00000000000000000000014 /* QuickTranslateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +345,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		PKGZIP000000000000000000001 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.19;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		SPDEPZIP000000000000000001 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = PKGZIP000000000000000000001 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = P00000000000000000000001 /* Project object */;
 }

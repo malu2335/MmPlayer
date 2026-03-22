@@ -36,39 +36,46 @@ final class LlmClient {
         promptAssetName: String = "llm_prompts"
     ) async throws -> LlmTranslationResult {
         guard AppSettings.isApiConfigured() else { throw LlmError.notConfigured }
-        guard AppSettings.apiFormat != "gemini" else {
-            throw LlmError.invalidResponse("当前 iOS 版仅支持 OpenAI 兼容接口，请在设置中选择 openai 格式。")
-        }
         let config = try loadPromptConfig(name: promptAssetName)
         let userPayload = buildUserPayload(text: pageText, glossary: glossary)
-        let messages = buildMessages(config: config, userPayload: userPayload)
+        let format = AppSettings.apiFormat.lowercased()
+
+        if format == "gemini" {
+            return try await translateGemini(config: config, userPayload: userPayload)
+        }
+        return try await translateOpenAI(config: config, userPayload: userPayload)
+    }
+
+    // MARK: - OpenAI 兼容
+
+    private func translateOpenAI(config: PromptConfig, userPayload: String) async throws -> LlmTranslationResult {
+        let messages = buildOpenAiMessages(config: config, userPayload: userPayload)
         let model = selectModel()
         let url = try buildChatCompletionsURL()
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(AppSettings.apiKey)", forHTTPHeaderField: "Authorization")
-        let body = buildOpenAiBody(model: model, messages: messages)
-        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        request.httpBody = try JSONSerialization.data(withJSONObject: buildOpenAiBody(model: model, messages: messages))
         request.timeoutInterval = TimeInterval(AppSettings.apiTimeoutSeconds)
 
         let (data, response) = try await URLSession.shared.data(for: request)
-        guard let http = response as? HTTPURLResponse else {
-            throw LlmError.invalidResponse("无 HTTP 响应")
-        }
-        guard (200...299).contains(http.statusCode) else {
-            let text = String(data: data, encoding: .utf8) ?? ""
-            throw LlmError.http(http.statusCode, text)
-        }
+        try throwIfHttpError(data: data, response: response)
         guard let raw = parseOpenAiContent(data: data) else {
             throw LlmError.invalidResponse(String(data: data, encoding: .utf8) ?? "")
         }
         return try parseTranslationContent(raw)
     }
 
-    private func selectModel() -> String {
-        let parts = AppSettings.modelName.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
-        return parts.first ?? AppSettings.modelName.trimmingCharacters(in: .whitespacesAndNewlines)
+    private func buildOpenAiMessages(config: PromptConfig, userPayload: String) -> [[String: Any]] {
+        var messages: [[String: Any]] = [
+            ["role": "system", "content": config.systemPrompt]
+        ]
+        for ex in config.exampleMessages {
+            messages.append(["role": ex.role, "content": ex.content])
+        }
+        messages.append(["role": "user", "content": config.userPromptPrefix + userPayload])
+        return messages
     }
 
     private func buildChatCompletionsURL() throws -> URL {
@@ -90,6 +97,131 @@ final class LlmClient {
             throw LlmError.invalidResponse("API 地址无效")
         }
         return url
+    }
+
+    private func buildOpenAiBody(model: String, messages: [[String: Any]]) -> [String: Any] {
+        [
+            "model": model,
+            "messages": messages,
+            "temperature": AppSettings.llmTemperature
+        ]
+    }
+
+    // MARK: - Gemini（与 Android `LlmClient` 行为对齐）
+
+    private func translateGemini(config: PromptConfig, userPayload: String) async throws -> LlmTranslationResult {
+        let url = try buildGeminiGenerateURL()
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONSerialization.data(withJSONObject: buildGeminiBody(config: config, userPayload: userPayload))
+        request.timeoutInterval = TimeInterval(AppSettings.apiTimeoutSeconds)
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        try throwIfHttpError(data: data, response: response)
+        if let errMsg = parseGeminiErrorMessage(data: data) {
+            throw LlmError.http((response as? HTTPURLResponse)?.statusCode ?? 400, errMsg)
+        }
+        guard let raw = parseGeminiTextContent(data: data) else {
+            throw LlmError.invalidResponse(String(data: data, encoding: .utf8) ?? "")
+        }
+        return try parseTranslationContent(raw)
+    }
+
+    private func buildGeminiGenerateURL() throws -> URL {
+        let model = normalizeGeminiModelName(selectModel())
+        var base = AppSettings.apiUrl.trimmingCharacters(in: .whitespacesAndNewlines)
+        while base.hasSuffix("/") { base.removeLast() }
+        let endpoint: String
+        if base.contains(":generateContent") {
+            endpoint = base
+        } else if base.hasSuffix("/v1beta") || base.hasSuffix("/v1") {
+            endpoint = "\(base)/\(model):generateContent"
+        } else {
+            endpoint = "\(base)/v1beta/\(model):generateContent"
+        }
+        let withKey = appendGeminiApiKey(to: endpoint, key: AppSettings.apiKey)
+        guard let url = URL(string: withKey) else {
+            throw LlmError.invalidResponse("Gemini URL 无效")
+        }
+        return url
+    }
+
+    private func normalizeGeminiModelName(_ modelName: String) -> String {
+        var trimmed = modelName.trimmingCharacters(in: .whitespacesAndNewlines)
+        while trimmed.hasPrefix("/") { trimmed.removeFirst() }
+        if trimmed.lowercased().hasPrefix("models/") { return trimmed }
+        return "models/\(trimmed)"
+    }
+
+    private func appendGeminiApiKey(to urlString: String, key: String) -> String {
+        let encoded = key.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? key
+        let sep = urlString.contains("?") ? "&" : "?"
+        return urlString + sep + "key=" + encoded
+    }
+
+    private func buildGeminiBody(config: PromptConfig, userPayload: String) -> [String: Any] {
+        var contents: [[String: Any]] = []
+        for ex in config.exampleMessages {
+            let lower = ex.role.lowercased()
+            let role = (lower == "assistant" || lower == "model") ? "model" : "user"
+            contents.append([
+                "role": role,
+                "parts": [["text": ex.content]]
+            ])
+        }
+        let userText = config.userPromptPrefix + userPayload
+        contents.append([
+            "role": "user",
+            "parts": [["text": userText]]
+        ])
+        var body: [String: Any] = ["contents": contents]
+        if !config.systemPrompt.isEmpty {
+            body["systemInstruction"] = [
+                "parts": [["text": config.systemPrompt]]
+            ]
+        }
+        body["generationConfig"] = [
+            "temperature": AppSettings.llmTemperature,
+            "responseMimeType": "application/json"
+        ]
+        return body
+    }
+
+    private func parseGeminiErrorMessage(data: Data) -> String? {
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let err = json["error"] as? [String: Any],
+              let msg = err["message"] as? String,
+              !msg.isEmpty else { return nil }
+        return msg
+    }
+
+    private func parseGeminiTextContent(data: Data) -> String? {
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let candidates = json["candidates"] as? [[String: Any]],
+              let first = candidates.first,
+              let content = first["content"] as? [String: Any],
+              let parts = content["parts"] as? [[String: Any]] else { return nil }
+        let texts = parts.compactMap { $0["text"] as? String }.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
+        let joined = texts.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines)
+        return joined.nilIfEmpty
+    }
+
+    // MARK: - 共用
+
+    private func selectModel() -> String {
+        let parts = AppSettings.modelName.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
+        return parts.first ?? AppSettings.modelName.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private func throwIfHttpError(data: Data, response: URLResponse) throws {
+        guard let http = response as? HTTPURLResponse else {
+            throw LlmError.invalidResponse("无 HTTP 响应")
+        }
+        guard (200...299).contains(http.statusCode) else {
+            let text = String(data: data, encoding: .utf8) ?? ""
+            throw LlmError.http(http.statusCode, text)
+        }
     }
 
     private func loadPromptConfig(name: String) throws -> PromptConfig {
@@ -117,26 +249,6 @@ final class LlmClient {
         let cfg = PromptConfig(systemPrompt: system, userPromptPrefix: prefix, exampleMessages: examples)
         promptCache[name] = cfg
         return cfg
-    }
-
-    private func buildMessages(config: PromptConfig, userPayload: String) -> [[String: Any]] {
-        var messages: [[String: Any]] = [
-            ["role": "system", "content": config.systemPrompt]
-        ]
-        for ex in config.exampleMessages {
-            messages.append(["role": ex.role, "content": ex.content])
-        }
-        messages.append(["role": "user", "content": config.userPromptPrefix + userPayload])
-        return messages
-    }
-
-    private func buildOpenAiBody(model: String, messages: [[String: Any]]) -> [String: Any] {
-        var body: [String: Any] = [
-            "model": model,
-            "messages": messages,
-            "temperature": AppSettings.llmTemperature
-        ]
-        return body
     }
 
     private func buildUserPayload(text: String, glossary: [String: String]) -> String {

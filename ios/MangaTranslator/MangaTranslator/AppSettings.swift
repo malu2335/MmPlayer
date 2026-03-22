@@ -19,7 +19,7 @@ enum AppSettings {
         set { suite.set(newValue, forKey: "model_name") }
     }
 
-    /// 仅实现 OpenAI 兼容接口；`gemini` 可后续扩展。
+    /// `openai`：OpenAI 兼容 Chat Completions；`gemini`：Google Gemini `generateContent`（与 Android `ApiFormat` 一致）。
     static var apiFormat: String {
         get { suite.string(forKey: "api_format") ?? "openai" }
         set { suite.set(newValue, forKey: "api_format") }
