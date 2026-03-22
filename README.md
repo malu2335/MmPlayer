@@ -27,6 +27,20 @@
 2. 运行 **MangaTranslator** 目标。
 3. 在 **设置** 中选择接口类型并填写地址、Key、模型；在 **漫画库** 中管理作品并翻译。
 
+## 单元测试
+
+工程内已包含 **MangaTranslatorTests** 目标（不访问网络、不依赖真机相机）：
+
+- **Xcode**：`Product → Test` 或快捷键 **⌘U**。
+- **命令行**（需在 macOS 上安装 Xcode / `xcodebuild`）：
+
+```bash
+cd ios/MangaTranslator
+xcodebuild test -scheme MangaTranslator -destination 'platform=iOS Simulator,name=iPhone 16' -quiet
+```
+
+当前用例覆盖：`TextProcessing`（`<b>` 分段、英文 OCR 归一化）、`TranslationStore` / `GlossaryStore` / `OcrStore` 的磁盘读写与缓存键逻辑。
+
 ## 与 Android 版仍存在的差异
 
 | 项目 | Android | 本 iOS 版 |
