@@ -1,0 +1,502 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B00000000000000000000001 /* MangaTranslatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000001 /* MangaTranslatorApp.swift */; };
+		B00000000000000000000002 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000002 /* RootTabView.swift */; };
+		B00000000000000000000003 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000003 /* LibraryView.swift */; };
+		B00000000000000000000004 /* FolderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000004 /* FolderDetailView.swift */; };
+		B00000000000000000000005 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000005 /* SettingsView.swift */; };
+		B00000000000000000000006 /* ReadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000006 /* ReadingView.swift */; };
+		B00000000000000000000007 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000007 /* Models.swift */; };
+		B00000000000000000000008 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000008 /* AppSettings.swift */; };
+		B00000000000000000000009 /* LibraryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000009 /* LibraryRepository.swift */; };
+		B0000000000000000000000A /* TranslationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000A /* TranslationStore.swift */; };
+		B0000000000000000000000B /* OcrStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000B /* OcrStore.swift */; };
+		B0000000000000000000000C /* GlossaryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000C /* GlossaryStore.swift */; };
+		B0000000000000000000000D /* TextProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000D /* TextProcessing.swift */; };
+		B0000000000000000000000E /* VisionTextPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000E /* VisionTextPipeline.swift */; };
+		B0000000000000000000000F /* LlmClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000F /* LlmClient.swift */; };
+		B00000000000000000000010 /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000010 /* TranslationService.swift */; };
+		B00000000000000000000011 /* llm_prompts.json in Resources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000011 /* llm_prompts.json */; };
+		B00000000000000000000012 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000012 /* Assets.xcassets */; };
+		B00000000000000000000013 /* BackgroundTranslationActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000013 /* BackgroundTranslationActivity.swift */; };
+		B00000000000000000000014 /* QuickTranslateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000014 /* QuickTranslateView.swift */; };
+		CZIP0000000000000000000001 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = SPDEPZIP000000000000000001 /* ZIPFoundation */; };
+		B00000000000000000000015 /* MangaTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000015 /* MangaTranslatorTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E00000000000000000000001 /* MangaTranslator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaTranslator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E00000000000000000000002 /* MangaTranslatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MangaTranslatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F00000000000000000000001 /* MangaTranslatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaTranslatorApp.swift; sourceTree = "<group>"; };
+		F00000000000000000000002 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		F00000000000000000000003 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		F00000000000000000000004 /* FolderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailView.swift; sourceTree = "<group>"; };
+		F00000000000000000000005 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F00000000000000000000006 /* ReadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingView.swift; sourceTree = "<group>"; };
+		F00000000000000000000007 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		F00000000000000000000008 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		F00000000000000000000009 /* LibraryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRepository.swift; sourceTree = "<group>"; };
+		F0000000000000000000000A /* TranslationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationStore.swift; sourceTree = "<group>"; };
+		F0000000000000000000000B /* OcrStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OcrStore.swift; sourceTree = "<group>"; };
+		F0000000000000000000000C /* GlossaryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossaryStore.swift; sourceTree = "<group>"; };
+		F0000000000000000000000D /* TextProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextProcessing.swift; sourceTree = "<group>"; };
+		F0000000000000000000000E /* VisionTextPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionTextPipeline.swift; sourceTree = "<group>"; };
+		F0000000000000000000000F /* LlmClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlmClient.swift; sourceTree = "<group>"; };
+		F00000000000000000000010 /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
+		F00000000000000000000011 /* llm_prompts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = llm_prompts.json; sourceTree = "<group>"; };
+		F00000000000000000000012 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F00000000000000000000013 /* BackgroundTranslationActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTranslationActivity.swift; sourceTree = "<group>"; };
+		F00000000000000000000014 /* QuickTranslateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTranslateView.swift; sourceTree = "<group>"; };
+		F00000000000000000000015 /* MangaTranslatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaTranslatorTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C00000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CZIP0000000000000000000001 /* ZIPFoundation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXContainerItemProxy section */
+		PRX000000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = P00000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = T00000000000000000000001;
+			remoteInfo = MangaTranslator;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXGroup section */
+		G00000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				G00000000000000000000002 /* MangaTranslator */,
+				GTESTGRP000000000000000001 /* MangaTranslatorTests */,
+				G00000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G00000000000000000000002 /* MangaTranslator */ = {
+			isa = PBXGroup;
+			children = (
+				F00000000000000000000001 /* MangaTranslatorApp.swift */,
+				F00000000000000000000002 /* RootTabView.swift */,
+				F00000000000000000000003 /* LibraryView.swift */,
+				F00000000000000000000004 /* FolderDetailView.swift */,
+				F00000000000000000000005 /* SettingsView.swift */,
+				F00000000000000000000006 /* ReadingView.swift */,
+				F00000000000000000000007 /* Models.swift */,
+				F00000000000000000000008 /* AppSettings.swift */,
+				F00000000000000000000009 /* LibraryRepository.swift */,
+				F0000000000000000000000A /* TranslationStore.swift */,
+				F0000000000000000000000B /* OcrStore.swift */,
+				F0000000000000000000000C /* GlossaryStore.swift */,
+				F0000000000000000000000D /* TextProcessing.swift */,
+				F0000000000000000000000E /* VisionTextPipeline.swift */,
+				F0000000000000000000000F /* LlmClient.swift */,
+				F00000000000000000000010 /* TranslationService.swift */,
+				F00000000000000000000013 /* BackgroundTranslationActivity.swift */,
+				F00000000000000000000014 /* QuickTranslateView.swift */,
+				G00000000000000000000004 /* Resources */,
+				F00000000000000000000012 /* Assets.xcassets */,
+			);
+			path = MangaTranslator;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000001 /* MangaTranslator.app */,
+				E00000000000000000000002 /* MangaTranslatorTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		GTESTGRP000000000000000001 /* MangaTranslatorTests */ = {
+			isa = PBXGroup;
+			children = (
+				F00000000000000000000015 /* MangaTranslatorTests.swift */,
+			);
+			path = MangaTranslatorTests;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000004 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F00000000000000000000011 /* llm_prompts.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		T00000000000000000000001 /* MangaTranslator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = L00000000000000000000002 /* Build configuration list for PBXNativeTarget "MangaTranslator" */;
+			buildPhases = (
+				C00000000000000000000002 /* Sources */,
+				C00000000000000000000001 /* Frameworks */,
+				C00000000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MangaTranslator;
+			packageProductDependencies = (
+				SPDEPZIP000000000000000001 /* ZIPFoundation */,
+			);
+			productName = MangaTranslator;
+			productReference = E00000000000000000000001 /* MangaTranslator.app */;
+			productType = "com.apple.product-type.application";
+		};
+		TTEST00000000000000000001 /* MangaTranslatorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = LTEST000000000000000000001 /* Build configuration list for PBXNativeTarget "MangaTranslatorTests" */;
+			buildPhases = (
+				CTESTSRC000000000000000001 /* Sources */,
+				CTESTFW000000000000000001 /* Frameworks */,
+				CTESTRES000000000000000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DEP00000000000000000000001 /* PBXTargetDependency */,
+			);
+			name = MangaTranslatorTests;
+			productName = MangaTranslatorTests;
+			productReference = E00000000000000000000002 /* MangaTranslatorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		P00000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					T00000000000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					TTEST00000000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = T00000000000000000000001;
+					};
+				};
+			};
+			buildConfigurationList = L00000000000000000000001 /* Build configuration list for PBXProject "MangaTranslator" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = G00000000000000000000001;
+			productRefGroup = G00000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			packageReferences = (
+				PKGZIP000000000000000000001 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+			);
+			targets = (
+				T00000000000000000000001 /* MangaTranslator */,
+				TTEST00000000000000000001 /* MangaTranslatorTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C00000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00000000000000000000011 /* llm_prompts.json in Resources */,
+				B00000000000000000000012 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CTESTRES000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CTESTFW000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CTESTSRC000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00000000000000000000015 /* MangaTranslatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C00000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00000000000000000000001 /* MangaTranslatorApp.swift in Sources */,
+				B00000000000000000000002 /* RootTabView.swift in Sources */,
+				B00000000000000000000003 /* LibraryView.swift in Sources */,
+				B00000000000000000000004 /* FolderDetailView.swift in Sources */,
+				B00000000000000000000005 /* SettingsView.swift in Sources */,
+				B00000000000000000000006 /* ReadingView.swift in Sources */,
+				B00000000000000000000007 /* Models.swift in Sources */,
+				B00000000000000000000008 /* AppSettings.swift in Sources */,
+				B00000000000000000000009 /* LibraryRepository.swift in Sources */,
+				B0000000000000000000000A /* TranslationStore.swift in Sources */,
+				B0000000000000000000000B /* OcrStore.swift in Sources */,
+				B0000000000000000000000C /* GlossaryStore.swift in Sources */,
+				B0000000000000000000000D /* TextProcessing.swift in Sources */,
+				B0000000000000000000000E /* VisionTextPipeline.swift in Sources */,
+				B0000000000000000000000F /* LlmClient.swift in Sources */,
+				B00000000000000000000010 /* TranslationService.swift in Sources */,
+				B00000000000000000000013 /* BackgroundTranslationActivity.swift in Sources */,
+				B00000000000000000000014 /* QuickTranslateView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		X00000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		X00000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		X00000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "漫画翻译";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "用于将相册中的漫画图片导入应用漫画库。";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "用于从相册选择并导入漫画图片。";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mangatranslator.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				ENABLE_TESTABILITY = YES;
+			};
+			name = Debug;
+		};
+		X00000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "漫画翻译";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "用于将相册中的漫画图片导入应用漫画库。";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "用于从相册选择并导入漫画图片。";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mangatranslator.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		XTESTDBG000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mangatranslator.ios.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MangaTranslator.app/MangaTranslator";
+			};
+			name = Debug;
+		};
+		XTESTREL000000000000000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mangatranslator.ios.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MangaTranslator.app/MangaTranslator";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		L00000000000000000000001 /* Build configuration list for PBXProject "MangaTranslator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X00000000000000000000001 /* Debug */,
+				X00000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		L00000000000000000000002 /* Build configuration list for PBXNativeTarget "MangaTranslator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X00000000000000000000003 /* Debug */,
+				X00000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		LTEST000000000000000000001 /* Build configuration list for PBXNativeTarget "MangaTranslatorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				XTESTDBG000000000000000001 /* Debug */,
+				XTESTREL000000000000000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin PBXTargetDependency section */
+		DEP00000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = T00000000000000000000001 /* MangaTranslator */;
+			targetProxy = PRX000000000000000000000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		PKGZIP000000000000000000001 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.19;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		SPDEPZIP000000000000000001 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = PKGZIP000000000000000000001 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = P00000000000000000000001 /* Project object */;
+}
