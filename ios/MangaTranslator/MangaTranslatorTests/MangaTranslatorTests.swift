@@ -81,6 +81,22 @@ final class GlossaryStoreTests: XCTestCase {
     }
 }
 
+final class OcrModelPathsTests: XCTestCase {
+    func testDefaultRootEndsWithOcrModels() {
+        let url = OcrModelPaths.defaultRootDirectory()
+        XCTAssertTrue(url.path.hasSuffix("ocr_models"), "path=\(url.path)")
+    }
+
+    func testResolvedUsesDefaultWhenCustomInvalid() {
+        let before = AppSettings.ocrModelsDirectoryPath
+        AppSettings.ocrModelsDirectoryPath = "/nonexistent_path_\(UUID().uuidString)"
+        let url = OcrModelPaths.resolvedRootDirectory()
+        XCTAssertTrue(url.path.contains("MangaTranslator"))
+        XCTAssertTrue(url.path.hasSuffix("ocr_models"))
+        AppSettings.ocrModelsDirectoryPath = before
+    }
+}
+
 final class OcrStoreTests: XCTestCase {
     func testCacheModeMismatchReturnsNil() throws {
         let dir = FileManager.default.temporaryDirectory.appendingPathComponent("mt_ocr_\(UUID().uuidString)")

@@ -49,6 +49,12 @@ enum AppSettings {
         set { suite.set(min(100, max(10, newValue)), forKey: "translation_bubble_opacity_percent") }
     }
 
+    /// 自定义 OCR / 检测 ONNX 模型根目录的**绝对路径**（需为已存在的文件夹）。留空则使用 `Application Support/.../MangaTranslator/ocr_models/`。
+    static var ocrModelsDirectoryPath: String {
+        get { suite.string(forKey: "ocr_models_directory") ?? "" }
+        set { suite.set(newValue, forKey: "ocr_models_directory") }
+    }
+
     static func isApiConfigured() -> Bool {
         !apiUrl.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             && !apiKey.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty

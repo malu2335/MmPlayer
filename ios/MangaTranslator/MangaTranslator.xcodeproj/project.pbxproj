@@ -29,6 +29,7 @@
 		B00000000000000000000014 /* QuickTranslateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000014 /* QuickTranslateView.swift */; };
 		CZIP0000000000000000000001 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = SPDEPZIP000000000000000001 /* ZIPFoundation */; };
 		B00000000000000000000015 /* MangaTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000015 /* MangaTranslatorTests.swift */; };
+		B00000000000000000000016 /* OcrModelPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000016 /* OcrModelPaths.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		F00000000000000000000013 /* BackgroundTranslationActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTranslationActivity.swift; sourceTree = "<group>"; };
 		F00000000000000000000014 /* QuickTranslateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTranslateView.swift; sourceTree = "<group>"; };
 		F00000000000000000000015 /* MangaTranslatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaTranslatorTests.swift; sourceTree = "<group>"; };
+		F00000000000000000000016 /* OcrModelPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OcrModelPaths.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				F00000000000000000000010 /* TranslationService.swift */,
 				F00000000000000000000013 /* BackgroundTranslationActivity.swift */,
 				F00000000000000000000014 /* QuickTranslateView.swift */,
+				F00000000000000000000016 /* OcrModelPaths.swift */,
 				G00000000000000000000004 /* Resources */,
 				F00000000000000000000012 /* Assets.xcassets */,
 			);
@@ -288,6 +291,7 @@
 				B00000000000000000000010 /* TranslationService.swift in Sources */,
 				B00000000000000000000013 /* BackgroundTranslationActivity.swift in Sources */,
 				B00000000000000000000014 /* QuickTranslateView.swift in Sources */,
+				B00000000000000000000016 /* OcrModelPaths.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
