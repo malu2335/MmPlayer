@@ -6,7 +6,8 @@
 
 - **漫画库**：在沙盒 `Application Support/manga_library/` 下管理文件夹；支持从相册导入、**CBZ/ZIP（解压后新建文件夹）**、以及从「文件」App **递归导入文件夹**（适用于 EhViewer 等导出目录）。
 - **快速翻译**：独立标签页，从相册或**剪贴板图片**单张走完整 OCR + 翻译流程（iOS 无法在其它 App 上层显示系统级悬浮窗，此为替代方案）。
-- **OCR**：使用 **Apple Vision**（`VNRecognizeTextRequest`）识别日文/英文并合并为气泡区域；**未内置 Android 端 ONNX 模型**（若需像素级一致的气泡检测，需自行集成 ONNX Runtime Mobile / Core ML 等）。
+- **OCR**：使用 **Apple Vision**（`VNRecognizeTextRequest`）识别日文/英文并合并为气泡区域；**未内置 Android 端 ONNX 推理**（若需与安卓一致，需自行集成 ONNX Runtime Mobile / Core ML 等）。
+- **OCR 模型路径**：默认 **`Application Support/MangaTranslator/ocr_models/`**（启动时自动创建）。可在 **设置 → OCR 模型路径** 填写本机**绝对路径**覆盖；同页会列出与 Android `assets/` 对齐的文件名及是否已放入目录。将 Hugging Face 等处下载的 `.onnx` 按原名拷贝到该目录即可（当前版本仍以 Vision 为主，路径供同步与后续扩展）。
 - **翻译 API**：**OpenAI 兼容**（`/v1/chat/completions`）与 **Google Gemini**（`generateContent`，与 Android `ApiFormat.GEMINI` 对齐）；共用 `llm_prompts.json`，解析 `translation` / `glossary_used` 与 `<b>...</b>` 分段。
 - **批量翻译保活**：翻译文件夹时**禁止自动锁屏**并申请 **UIKit 后台任务**，减轻切出应用后中断的概率（行为上接近 Android 前台服务，但受 iOS 后台策略限制）。
 - **阅读**：横向翻页（`TabView`），在原图上叠加译文气泡，支持拖动。
